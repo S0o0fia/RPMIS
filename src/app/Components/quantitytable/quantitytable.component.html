@@ -1,0 +1,59 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxLayout="column">
+               <h4>{{'Quantity Table'|translate}}</h4>
+
+            </div> <span fxFlex></span>
+            
+            <div fxLayout="column">
+               <div class="row">
+               <button class="mrgn-b-xs" mat-raised-button color="primary" (click)="openDialog()">{{'Add'|translate}}</button>
+               <button  matTooltip="{{'Export Excel'|translate}}" class="mrgn-b-xs" mat-raised-button color="primary" (click)="generatePdf()"><mat-icon>insert_drive_file</mat-icon></button>
+            </div>
+            </div> 
+         </div>
+        
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none">
+         <div class="table-responsive" id="dvPdf">
+           
+            <table class="table table-hover table-middle th-fw-light mb-0">
+               <thead>
+                  <tr>
+                     <th>{{'Main Section'|translate}}</th>
+                     <th>{{'Sub Section'|translate}}</th>
+                     <th>{{'Type Of Works'|translate}}</th>
+                     <th>{{'Item Number'|translate}}</th>
+                     <th>{{'Item Name'|translate}}</th>
+                     <th>{{'Contract Quantity'|translate}}</th>
+                     <th>{{'Unit Price'|translate}}</th>
+                     <th>{{'Total Price'|translate}}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let data of Qty_tbl | paginate: { id: 'listing_pagination',
+                  itemsPerPage: 10,
+                  currentPage: page,
+                  totalItems: totalRec }">
+                     <td>{{data.main_section_name}}</td>
+                     <td>{{data.second_subsection_name}}</td>
+                     <td>{{data.first_subsection_name}}</td>
+                     <td>{{data.item_number}}</td>
+                     <td>{{data.item_name}}</td>
+                     <td>{{data.item_qty}}</td>
+                     <td>{{data.price_unit}}</td>
+                     <td>{{data.price_total}}</td>
+                  </tr>
+               </tbody>
+            </table>
+            <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true"
+            previousLabel="{{'Previous'|translate}}"
+             nextLabel="{{'Next'|translate}}"
+            (pageChange)="page = $event"></pagination-controls>
+         </div>
+      </div>
+   </mat-card>
+</div>
